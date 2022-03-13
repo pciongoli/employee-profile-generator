@@ -35,7 +35,7 @@ const promptManager = () => {
         {
             type: "input",
             name: "office",
-            message: "Please enter the team manager's Office Number (#) ."
+            message: "Please enter the team manager's Office Number (#)."
         }
         
     ])
@@ -43,59 +43,91 @@ const promptManager = () => {
 }
 
 
-const promptEmployee = employeeData => {
-    if (!employeeData.employee) {
-        employeeData.employee = [];
-    }
+// const promptEmployee = employeeData => {
+//     if (!employeeData.employee) {
+//         employeeData.employee = [];
+//     }
 
-    return inquirer 
-    .prompt([
-        {
-            type: "list",
-            name: "employeeSelect",
-            message: "Would you like to add another Employee?",
-            choices: ["Engineer", "Intern", "No. Finish my profile"]
-        }
-    ])
-    .then((selection) => {
+//     return inquirer 
+//     .prompt([
+//         {
+//             type: "list",
+//             name: "employeeSelect",
+//             message: "Would you like to add another Employee?",
+//             choices: ["Engineer", "Intern", "No. Finish my profile"]
+//         }
+//     ])
+    // .then((selection) => {
     
-        if (selection.employeeSelect === "Engineer") {
+    //     if (selection.employeeSelect === "Engineer") {
 
-            inquirer
-            .prompt([
-                { 
-                    type: "input",
-                    name: "name",
-                    message: "Please enter the team engineer's name."
-                },
-                {
-                    type: "input",
-                    name: "id",
-                    message: "Please enter the team engineer's id."
-                },
-                {
-                    type: "input",
-                    name: "email",
-                    message: "Please enter the team engineer's email."
-                },
-                {
-                    type: "input",
-                    name: "email",
-                    message: "Please enter the team engineer's GitHub username."
-                }
+    //         inquirer
+    //         .prompt([
+    //             { 
+    //                 type: "input",
+    //                 name: "name",
+    //                 message: "Please enter the team engineer's name."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "id",
+    //                 message: "Please enter the team engineer's id."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "email",
+    //                 message: "Please enter the team engineer's email."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "email",
+    //                 message: "Please enter the team engineer's GitHub username."
+    //             }
 
-            ])  
-        } 
-    })
-}
+    //         ])
+    //     } 
+    // })
+
+    // .then((selection) => {
+    
+    //     if (selection.employeeSelect === "Intern") {
+
+    //         inquirer
+    //         .prompt([
+    //             { 
+    //                 type: "input",
+    //                 name: "name",
+    //                 message: "Please enter the team intern's name."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "id",
+    //                 message: "Please enter the team intern's id."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "email",
+    //                 message: "Please enter the team intern's email."
+    //             },
+    //             {
+    //                 type: "input",
+    //                 name: "email",
+    //                 message: "Please enter the school you team's intern attends."
+    //             }
+
+    //         ])  
+    //     } 
+    // })
+    
+// }
 
 promptManager()
-  .then(promptEmployee)
-  .then(employeeData => {
-      console.log(employeeData);
+//   .then(promptEmployee)
+//   .then(employeeData => {
+//       console.log(employeeData);
 
 
-  });
+//   });
 
 
 
