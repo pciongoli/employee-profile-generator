@@ -35,9 +35,9 @@ promptManager = () => {
         },
         {
             type: "input",
-            name: "office",
+            name: "officeNumber",
             message: "Please enter the team manager's Office Number (#)."
-        },
+        }
         
     ])
     .then((answers) => {
@@ -59,8 +59,19 @@ function employeePrompt () {
     ])
     .then((answer) => {
         if (answer.role === "Engineer") {
-            console.log(answer)
-            employeePrompt();
+            return inquirer
+            .prompt ([
+                {
+                    type: "input",
+                    name: "github",
+                    message: "Please enter team engineer's GitHub user-name."
+                }
+            ])
+            .then((answer) => {
+                console.log(answer)
+                employeePrompt();
+            })
+            
         } 
         else if (answer.role === "Intern") {
             console.log(answer)
@@ -68,6 +79,7 @@ function employeePrompt () {
         } 
         else {
             console.log("Your employee portfolio is complete!")
+            console.log()
             return;
         }
     })
