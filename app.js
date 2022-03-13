@@ -39,8 +39,8 @@ function promptEmployee() {
     ])
     .then((answers) => {
         console.log(answers);
-        promptManager();
     })
+    .then(promptManager)
 }
 
 
@@ -57,8 +57,8 @@ function promptManager() {
     ])
     .then((answers) => {
         console.log(answers);
-        employeePrompt();
     })
+    .then(employeePrompt)
 }
 
 
@@ -75,10 +75,11 @@ function employeePrompt() {
         
     ])
     
-    // if engineer role is selected then prompt for github user-name
 
+    // if engineer role is selected then prompt for github user-name
     .then((answer) => {
         if (answer.role === "Engineer") {
+
             return inquirer
             .prompt ([
                 {
@@ -91,11 +92,12 @@ function employeePrompt() {
                 console.log(answer)
                 employeePrompt();
             })
-            
         } 
+
 
         // if intern is selected prompt for school
         else if (answer.role === "Intern") {
+
             return inquirer
             .prompt ([
                 {
@@ -110,13 +112,16 @@ function employeePrompt() {
             })
         } 
 
+
         // if prompt to finish portfolio is selected, end the process
         else {
             console.log("Your employee portfolio is complete!")
             console.log(answer.role)
             return;
         }
-    });
+
+    })
+
 }
 
 // call for employee prompt
