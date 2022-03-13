@@ -76,6 +76,7 @@ function employeePrompt() {
     ])
     
     // if engineer role is selected then prompt for github user-name
+
     .then((answer) => {
         if (answer.role === "Engineer") {
             return inquirer
@@ -99,7 +100,7 @@ function employeePrompt() {
             .prompt ([
                 {
                     type: "input",
-                    name: "github",
+                    name: "school",
                     message: "Please enter the name of the team intern's school."
                 }
             ])
