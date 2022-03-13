@@ -120,4 +120,3 @@ function employeePrompt() {
 
 // call for employee prompt
 promptEmployee();
-
