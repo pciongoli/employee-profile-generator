@@ -15,8 +15,8 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // need to make prompt that can run for each employee type to keep code DRY
-function promptEmployee() {
-    inquirer
+function promptManager() {
+    inquirer    
     .prompt([
         {
             type: "input",
@@ -35,26 +35,14 @@ function promptEmployee() {
             name: "email",
             message: "Please eneter the employee's email."
             
-        }
-    ])
-    .then((answers) => {
-        console.log(answers);
-    })
-    .then(promptManager)
-}
-
-
-// Prompt to add officeNumber to team manager
-function promptManager() {
-    inquirer
-    .prompt([
+        },
         {
             type: "input",
             name: "officeNumber",
-            message: "Please enter the team manager's Office Number (#)."
+            message: "Please enter team manager's office number."
         }
-        
     ])
+    // need to have these answers 
     .then((answers) => {
         console.log(answers);
     })
@@ -62,7 +50,28 @@ function promptManager() {
 }
 
 
+// Prompt to add officeNumber to team manager
+// function promptManager() {
+//     inquirer
+//     .prompt([
+//         {
+//             type: "input",
+//             name: "officeNumber",
+//             message: "Please enter the team manager's Office Number (#)."
+//         }
+        
+//     ])
+//     // need to have this answer write to manager html
+//     .then((answers) => {
+//         console.log(answers);
+//     })
+//     .then(employeePrompt)
+// }
+
+
 // prompt to select type of employee to add, or end the app and generate team portfolio
+
+
 function employeePrompt() {
     inquirer
     .prompt ([
@@ -84,10 +93,29 @@ function employeePrompt() {
             .prompt ([
                 {
                     type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the employee."
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the employee."
+                    
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the employee's email."
+                    
+                },
+                {
+                    type: "input",
                     name: "github",
                     message: "Please enter team engineer's GitHub user-name."
                 }
             ])
+            // need to have this answer write to html
             .then((answer) => {
                 console.log(answer)
                 employeePrompt();
@@ -102,10 +130,29 @@ function employeePrompt() {
             .prompt ([
                 {
                     type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the employee."
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the employee."
+                    
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the employee's email."
+                    
+                },
+                {
+                    type: "input",
                     name: "school",
                     message: "Please enter the name of the team intern's school."
                 }
             ])
+            // need to have this answer write to html
             .then((answer) => {
                 console.log(answer)
                 employeePrompt();
@@ -125,4 +172,4 @@ function employeePrompt() {
 }
 
 // call for employee prompt
-promptEmployee();
+promptManager();
