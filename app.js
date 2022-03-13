@@ -15,111 +15,93 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 const promptManager = () => {
-    return inquirer
+    inquirer
     .prompt([
         { 
             type: "input",
             name: "name",
-            message: "Please enter the team manager's name."
+            message: "Please enter the team managers's name."
         },
         {
             type: "input",
             name: "id",
-            message: "Please enter the team manager's id."
+            message: "Please enter the team managers's id."
         },
         {
             type: "input",
             name: "email",
-            message: "Please enter the team manager's email."
+            message: "Please enter the team managers's email."
         },
         {
             type: "input",
-            name: "email",
+            name: "office",
             message: "Please enter the team manager's Office Number (#) ."
-        },
-        {
-            type: "confirm",
-            name: "confirmEngineer",
-            message: "Would you like to add an Engineer?",
-            default: true
-        },
-        {
-            type: "input",
-            name: "aboutEngineer",
-            message: "Please provide some information about your employee.",
-            when: ({ confirmEngineer }) => confirmEngineer
         }
-    ]);
-
-    
-};
-
-const promptEngineer = engineerData => {
-    console.log(`
-  ===================
-  Add a New Employee
-  ===================
-  `);
-
-if (!managerData.employee) {
-    engineerData.employee = [];
-}
-
-return inquirer
-    .prompt([
-        { 
-            type: "input",
-            name: "name",
-            message: "Please enter the team engineer's name."
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "Please enter the team engineer's id."
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "Please enter the team engineer's email."
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "Please enter the team engineer's GitHub username."
-        },
-        {
-            type: "confirm",
-            name: "confirmIntern",
-            message: "Would you like to add an Intern?",
-            default: true
-        }
-
+        
     ])
-    .then(promptManager => {
-        managerData.employee.push(engineerData);
-        if (engineerData.confirmAddEngineer) {
-            return promptEngineer(engineerData);
-        } else {
-            return managerData;
-        }
-    })
-    // .then(promptEngineer => {
-    //     engineerData.employee.push(internData);
-    //     if (internData.confirmAddIntern) {
-    //         return promptIntern(internData);
-    //     } else {
-    //         return engineerData;
-    //     }
-    // });
 
 }
 
+
+const promptEmployee = employeeData => {
+    if (!employeeData.employee) {
+        employeeData.employee = [];
+    }
+
+    return inquirer 
+    .prompt([
+        {
+            type: "list",
+            name: "employeeSelect",
+            message: "Would you like to add another Employee?",
+            choices: ["Engineer", "Intern", "No. Finish my profile"]
+        }
+    ])
+    .then((selection) => {
+    
+        if (selection.employeeSelect === "Engineer") {
+
+            inquirer
+            .prompt([
+                { 
+                    type: "input",
+                    name: "name",
+                    message: "Please enter the team engineer's name."
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please enter the team engineer's id."
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please enter the team engineer's email."
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please enter the team engineer's GitHub username."
+                }
+
+            ])  
+        } 
+    })
+}
 
 promptManager()
-  .then(promptEngineer)
-  .then(managerData => {
+  .then(promptEmployee)
+  .then(employeeData => {
+      console.log(employeeData);
 
-  })
+
+  });
+
+
+
+
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -140,3 +122,33 @@ promptManager()
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+   // promptEngineer() {
+    //     console.log(`
+    // ===================
+    // Add a New Employee
+    // ===================
+    // `);
+
+    // if (!managerData.employee) {
+    //     engineerData.employee = [];
+    // }
+
+  // .then(promptManager => {
+    //     managerData.employee.push(engineerData);
+    //     if (engineerData.confirmAddEngineer) {
+    //         return promptEngineer(engineerData);
+    //     } else {
+    //         return managerData;
+    //     }
+    // })
+
+  // .then(promptEngineer => {
+    //     engineerData.employee.push(internData);
+    //     if (internData.confirmAddIntern) {
+    //         return promptIntern(internData);
+    //     } else {
+    //         return engineerData;
+    //     }
+    // });
