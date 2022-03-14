@@ -10,64 +10,45 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let teammate = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // need to make prompt that can run for each employee type to keep code DRY
-function promptManager() {
-    inquirer    
-    .prompt([
-        {
-            type: "input",
-            name: "name",
-            message: "Please eneter the name of the employee."
-
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "Please eneter the id of the employee."
-            
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "Please eneter the employee's email."
-            
-        },
-        {
-            type: "input",
-            name: "officeNumber",
-            message: "Please enter team manager's office number."
-        }
-    ])
-    // need to have these answers 
-    .then((answers) => {
-        render(answers.name)
-    })
-    .then(employeePrompt)
-}
-
-
-// Prompt to add officeNumber to team manager
 // function promptManager() {
-//     inquirer
+//     inquirer    
 //     .prompt([
 //         {
 //             type: "input",
+//             name: "name",
+//             message: "Please eneter the name of the employee."
+
+//         },
+//         {
+//             type: "input",
+//             name: "id",
+//             message: "Please eneter the id of the employee."
+            
+//         },
+//         {
+//             type: "input",
+//             name: "email",
+//             message: "Please eneter the employee's email."
+            
+//         },
+//         {
+//             type: "input",
 //             name: "officeNumber",
-//             message: "Please enter the team manager's Office Number (#)."
+//             message: "Please enter team manager's office number."
 //         }
-        
 //     ])
-//     // need to have this answer write to manager html
+//     // need to call render to renderManager answers
 //     .then((answers) => {
-//         console.log(answers);
+//         render(answers.name)
 //     })
 //     .then(employeePrompt)
 // }
-
 
 // prompt to select type of employee to add, or end the app and generate team portfolio
 
@@ -79,34 +60,71 @@ function employeePrompt() {
             type: "list",
             name: "role",
             message: "Please select whether you would like to add an employee.",
-            choices: ["Engineer", "Intern", "No. Please finish my profile."]
+            choices: ["Manager", "Engineer", "Intern", "No. Please finish my profile."]
         }
         
     ])
-    
 
-    // if engineer role is selected then prompt for github user-name
+    // if manager role is selected then prompt for github user-name
     .then((answer) => {
-        if (answer.role === "Engineer") {
+        if (answer.role === "Manager") {
 
             return inquirer
             .prompt ([
                 {
                     type: "input",
                     name: "name",
-                    message: "Please eneter the name of the employee."
+                    message: "Please eneter the name of the manager."
         
                 },
                 {
                     type: "input",
                     name: "id",
-                    message: "Please eneter the id of the employee."
+                    message: "Please eneter the id of the manager."
+                
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the managers's email."
+                    
+                },
+                {
+                    type: "input",
+                    name: "officeNumber",
+                    message: "Please enter team manager's office number."
+                }
+            ])
+            // need to renderManager
+            .then((answer) => {
+                const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+                teammate.push(manager);
+                console.log(teammate)
+            })
+            .then(employeePrompt)
+        } 
+
+
+        else if (answer.role === "Engineer") {
+
+            return inquirer
+            .prompt ([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the team engineer."
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the team engineer."
                     
                 },
                 {
                     type: "input",
                     name: "email",
-                    message: "Please eneter the employee's email."
+                    message: "Please eneter the team engineer's email."
                     
                 },
                 {
@@ -115,12 +133,14 @@ function employeePrompt() {
                     message: "Please enter team engineer's GitHub user-name."
                 }
             ])
-            // need to have this answer write to html
+            // need renderEngineer
             .then((answer) => {
+                const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
+                teammate.push(engineer);
+                console.log(teammate)
             })
             .then(employeePrompt)
         } 
-
 
         // if intern is selected prompt for school
         else if (answer.role === "Intern") {
@@ -130,19 +150,19 @@ function employeePrompt() {
                 {
                     type: "input",
                     name: "name",
-                    message: "Please eneter the name of the employee."
+                    message: "Please eneter the name of the team intern."
         
                 },
                 {
                     type: "input",
                     name: "id",
-                    message: "Please eneter the id of the employee."
+                    message: "Please eneter the id of the team intern."
                     
                 },
                 {
                     type: "input",
                     name: "email",
-                    message: "Please eneter the employee's email."
+                    message: "Please eneter the team intern's email."
                     
                 },
                 {
@@ -151,11 +171,13 @@ function employeePrompt() {
                     message: "Please enter the name of the team intern's school."
                 }
             ])
-            // need to have this answer write to html
+            // need renderIntern
             .then((answer) => {
-                console.log(answer)
-                employeePrompt();
+                const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
+                teammate.push(intern);
+                console.log(teammate)
             })
+            .then(employeePrompt);
         } 
 
 
@@ -165,13 +187,16 @@ function employeePrompt() {
             console.log(answer.role)
             return;
         }
-
     })
-
 }
 
 // call for employee prompt
-promptManager();
+employeePrompt()
+
+
+    // .then(employeePrompt => {
+    //     return render
+    // })
 
 
 // HINTS
@@ -181,7 +206,7 @@ promptManager();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+// generate and return a block of HTML including templated divs for each employee! 
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
