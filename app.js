@@ -184,8 +184,7 @@ function employeePrompt() {
         // if prompt to finish portfolio is selected, end the process
         else {
             console.log("Your employee portfolio is complete!")
-            console.log(answer.role)
-            return;
+            
         }
     })
 }
