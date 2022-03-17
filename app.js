@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
+const OUTPUT_DIR = path.resolve(__dirname, "dist");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
@@ -96,10 +96,10 @@ function employeePrompt() {
                 }
             ])
             // need to renderManager
-            .then((answer) => {
-                const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+            .then((answerM) => {
+                const manager = new Manager(answerM.name, answerM.id, answerM.email, answerM.officeNumber);
                 teammate.push(manager);
-                console.log(teammate)
+                // console.log(teammate)
             })
             .then(employeePrompt)
         } 
@@ -134,10 +134,10 @@ function employeePrompt() {
                 }
             ])
             // need renderEngineer
-            .then((answer) => {
-                const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
+            .then((answerE) => {
+                const engineer = new Engineer(answerE.name, answerE.id, answerE.email, answerE.github);
                 teammate.push(engineer);
-                console.log(teammate)
+                // console.log(teammate)
             })
             .then(employeePrompt)
         } 
@@ -172,27 +172,37 @@ function employeePrompt() {
                 }
             ])
             // need renderIntern
-            .then((answer) => {
-                const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
+            .then((answerI) => {
+                const intern = new Intern(answerI.name, answerI.id, answerI.email, answerI.school);
                 teammate.push(intern);
-                console.log(teammate)
+                // console.log(teammate)
             })
             .then(employeePrompt);
         } 
-
-
-        // if prompt to finish portfolio is selected, end the process
-        else {
-            console.log("Your employee portfolio is complete!")
-            
+        else { 
+            // if prompt to finish portfolio is selected, end the process
+            console.log(teammate)
+            generatePage();
         }
-    })
+            
+            
+        
+    });
 }
 
+function generatePage() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(outputPath, render(teammate), 'utf8');
+};
+
 // call for employee prompt
-employeePrompt()
+employeePrompt();
 
-
+// Patrick
+// patrick@email.com
+// 
     // .then(employeePrompt => {
     //     return render
     // })
