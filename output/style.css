@@ -1,0 +1,16 @@
+
+.team-heading {
+    background: linear-gradient(40deg, #CCFFEE, #FFF7CC);
+}
+
+.card-header{
+    background: linear-gradient(40deg, #bcf0df, #f0e8bd);
+}
+
+.card-body {
+    background: linear-gradient(15deg, #f0e8bd, #e9f8f3);
+}
+
+.list-group-item {
+    background: #bcf0df;
+}

@@ -6,7 +6,8 @@ const path = require("path");
 const fs = require("fs");
 
 // changed output path to distribution
-const OUTPUT_DIR = path.resolve(__dirname, "dist");
+// had to change back because dist was getting ignored
+const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 // require the render from htmlRenderer
 const render = require("./lib/htmlRenderer");
