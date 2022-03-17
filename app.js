@@ -5,11 +5,13 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+// changed output path to distribution
 const OUTPUT_DIR = path.resolve(__dirname, "dist");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
+// require the render from htmlRenderer
 const render = require("./lib/htmlRenderer");
 
+// let teammate have an empty array to fill
 let teammate = [];
 
 // Write code to use inquirer to gather information about the development team members,
@@ -68,7 +70,7 @@ function employeePrompt() {
     // if manager role is selected then prompt for github user-name
     .then((answer) => {
         if (answer.role === "Manager") {
-
+            // inquirer prompt for manager
             return inquirer
             .prompt ([
                 {
@@ -106,7 +108,7 @@ function employeePrompt() {
 
 
         else if (answer.role === "Engineer") {
-
+            // inquirer prompt for engineer
             return inquirer
             .prompt ([
                 {
@@ -144,7 +146,7 @@ function employeePrompt() {
 
         // if intern is selected prompt for school
         else if (answer.role === "Intern") {
-
+            // inquirer prompt for intern
             return inquirer
             .prompt ([
                 {
@@ -182,11 +184,9 @@ function employeePrompt() {
         else { 
             // if prompt to finish portfolio is selected, end the process
             console.log(teammate)
+            console.log("Your new teammate webpage has been created! Please check it out in the dist folder!")
             generatePage();
         }
-            
-            
-        
     });
 }
 
