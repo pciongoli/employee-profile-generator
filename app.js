@@ -14,6 +14,253 @@ const render = require("./lib/htmlRenderer");
 // let teammate have an empty array to fill
 let teammate = [];
 
+function employeePrompt() {
+    inquirer
+    .prompt ([
+        {
+            type: "list",
+            name: "role",
+            message: "Please select whether you would like to add an employee.",
+            choices: ["Manager", "Engineer", "Intern", "No. Please finish my profile."]
+        }
+        
+    ])
+
+    // if manager role is selected then prompt for github user-name
+    .then((answer) => {
+        if (answer.role === "Manager") {
+            // inquirer prompt for manager
+            return inquirer
+            .prompt ([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the manager.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your managers name!");
+                            return false;
+                        }
+                    }
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the manager.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your managers id!");
+                            return false;
+                        }
+                    }
+                
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the managers's email.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your managers email!");
+                            return false;
+                        }
+                    }
+                    
+                },
+                {
+                    type: "input",
+                    name: "officeNumber",
+                    message: "Please enter team manager's office number.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your managers Office Number!");
+                            return false;
+                        }
+                    }
+                }
+            ])
+            // need to renderManager
+            .then((answerM) => {
+                const manager = new Manager(answerM.name, answerM.id, answerM.email, answerM.officeNumber);
+                teammate.push(manager);
+                // console.log(teammate)
+            })
+            .then(employeePrompt)
+        } 
+
+
+        else if (answer.role === "Engineer") {
+            // inquirer prompt for engineer
+            return inquirer
+            .prompt ([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the team engineer.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team engineer name!");
+                            return false;
+                        }
+                    }
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the team engineer.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team engineer id!");
+                            return false;
+                        }
+                    }
+                    
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the team engineer's email.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team engineer email!");
+                            return false;
+                        }
+                    }
+                    
+                },
+                {
+                    type: "input",
+                    name: "github",
+                    message: "Please enter team engineer's GitHub user-name.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team engineer GitHub user-name!");
+                            return false;
+                        }
+                    }
+                }
+            ])
+            // need renderEngineer
+            .then((answerE) => {
+                const engineer = new Engineer(answerE.name, answerE.id, answerE.email, answerE.github);
+                teammate.push(engineer);
+                // console.log(teammate)
+            })
+            .then(employeePrompt)
+        } 
+
+        // if intern is selected prompt for school
+        else if (answer.role === "Intern") {
+            // inquirer prompt for intern
+            return inquirer
+            .prompt ([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "Please eneter the name of the team intern.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team intern's name!");
+                            return false;
+                        }
+                    }
+        
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "Please eneter the id of the team intern.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team intern's ID!");
+                            return false;
+                        }
+                    }
+                    
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "Please eneter the team intern's email.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team intern's email!");
+                            return false;
+                        }
+                    }
+                    
+                },
+                {
+                    type: "input",
+                    name: "school",
+                    message: "Please enter the name of the team intern's school.",
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log("Please input your team intern's school!");
+                            return false;
+                        }
+                    }
+                }
+            ])
+            // need renderIntern
+            .then((answerI) => {
+                const intern = new Intern(answerI.name, answerI.id, answerI.email, answerI.school);
+                teammate.push(intern);
+                // console.log(teammate)
+            })
+            .then(employeePrompt);
+        } 
+        else { 
+            // if prompt to finish portfolio is selected, end the process
+            console.log(teammate)
+            console.log("Your new teammate webpage has been created! Please check it out in the dist folder!")
+            generatePage();
+        }
+    });
+}
+
+function generatePage() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(outputPath, render(teammate), 'utf8');
+};
+
+// call for employee prompt
+employeePrompt();
+
+// Patrick
+// patrick@email.com
+// 
+    // .then(employeePrompt => {
+    //     return render
+    // })
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -53,159 +300,6 @@ let teammate = [];
 // }
 
 // prompt to select type of employee to add, or end the app and generate team portfolio
-
-
-function employeePrompt() {
-    inquirer
-    .prompt ([
-        {
-            type: "list",
-            name: "role",
-            message: "Please select whether you would like to add an employee.",
-            choices: ["Manager", "Engineer", "Intern", "No. Please finish my profile."]
-        }
-        
-    ])
-
-    // if manager role is selected then prompt for github user-name
-    .then((answer) => {
-        if (answer.role === "Manager") {
-            // inquirer prompt for manager
-            return inquirer
-            .prompt ([
-                {
-                    type: "input",
-                    name: "name",
-                    message: "Please eneter the name of the manager."
-        
-                },
-                {
-                    type: "input",
-                    name: "id",
-                    message: "Please eneter the id of the manager."
-                
-                },
-                {
-                    type: "input",
-                    name: "email",
-                    message: "Please eneter the managers's email."
-                    
-                },
-                {
-                    type: "input",
-                    name: "officeNumber",
-                    message: "Please enter team manager's office number."
-                }
-            ])
-            // need to renderManager
-            .then((answerM) => {
-                const manager = new Manager(answerM.name, answerM.id, answerM.email, answerM.officeNumber);
-                teammate.push(manager);
-                // console.log(teammate)
-            })
-            .then(employeePrompt)
-        } 
-
-
-        else if (answer.role === "Engineer") {
-            // inquirer prompt for engineer
-            return inquirer
-            .prompt ([
-                {
-                    type: "input",
-                    name: "name",
-                    message: "Please eneter the name of the team engineer."
-        
-                },
-                {
-                    type: "input",
-                    name: "id",
-                    message: "Please eneter the id of the team engineer."
-                    
-                },
-                {
-                    type: "input",
-                    name: "email",
-                    message: "Please eneter the team engineer's email."
-                    
-                },
-                {
-                    type: "input",
-                    name: "github",
-                    message: "Please enter team engineer's GitHub user-name."
-                }
-            ])
-            // need renderEngineer
-            .then((answerE) => {
-                const engineer = new Engineer(answerE.name, answerE.id, answerE.email, answerE.github);
-                teammate.push(engineer);
-                // console.log(teammate)
-            })
-            .then(employeePrompt)
-        } 
-
-        // if intern is selected prompt for school
-        else if (answer.role === "Intern") {
-            // inquirer prompt for intern
-            return inquirer
-            .prompt ([
-                {
-                    type: "input",
-                    name: "name",
-                    message: "Please eneter the name of the team intern."
-        
-                },
-                {
-                    type: "input",
-                    name: "id",
-                    message: "Please eneter the id of the team intern."
-                    
-                },
-                {
-                    type: "input",
-                    name: "email",
-                    message: "Please eneter the team intern's email."
-                    
-                },
-                {
-                    type: "input",
-                    name: "school",
-                    message: "Please enter the name of the team intern's school."
-                }
-            ])
-            // need renderIntern
-            .then((answerI) => {
-                const intern = new Intern(answerI.name, answerI.id, answerI.email, answerI.school);
-                teammate.push(intern);
-                // console.log(teammate)
-            })
-            .then(employeePrompt);
-        } 
-        else { 
-            // if prompt to finish portfolio is selected, end the process
-            console.log(teammate)
-            console.log("Your new teammate webpage has been created! Please check it out in the dist folder!")
-            generatePage();
-        }
-    });
-}
-
-function generatePage() {
-    if (!fs.existsSync(OUTPUT_DIR)) {
-        fs.mkdirSync(OUTPUT_DIR);
-    }
-    fs.writeFileSync(outputPath, render(teammate), 'utf8');
-};
-
-// call for employee prompt
-employeePrompt();
-
-// Patrick
-// patrick@email.com
-// 
-    // .then(employeePrompt => {
-    //     return render
-    // })
 
 
 // HINTS
