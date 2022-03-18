@@ -2,6 +2,16 @@
 
 ## starter code was provided
 
+## User Instructions
+* You must first clone the repository for this project (https://github.com/pciongoli/employee-profile-generator)
+* Once you have cloned the file, open it on VS code. Make sure to have the node package manager installed.
+* Once all of the required packages are installed run the app through the terminal using the command "node app"
+* You will be taken through a series of prompts regarding the type of employee you would like to add
+* after you have entered each employee have your html file created by pressing the No. "Please finish my profile." selection
+* Your new html will now be in the output folder!!
+* Open the html in the browser and enjoy your brand new Employee Profile! 
+
+
 Your challenge is to build a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. Because testing is key to making code maintainable, you’ll also write unit tests for each part of your code and ensure that it passes all of them.
 
 Because this application won’t be deployed, you’ll also need to provide a link to a walkthrough video that demonstrates its functionality and all of the tests passing. You’ll need to submit a link to the video **and** add it to the README of your project.
