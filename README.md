@@ -1,16 +1,20 @@
 # 10 Object-Oriented Programming: Team Profile Generator
 
+## Link to Video of Deployed Project
+
+-  https://drive.google.com/file/d/1gHTsNdiy8Uw4aCcJ5i-YXoodDQJUUX6C/view
+
 ## starter code was provided
 
 ## User Instructions
-* You must first clone the repository for this project (https://github.com/pciongoli/employee-profile-generator)
-* Once you have cloned the file, open it on VS code. Make sure to have the node package manager installed.
-* Once all of the required packages are installed run the app through the terminal using the command "node app"
-* You will be taken through a series of prompts regarding the type of employee you would like to add
-* after you have entered each employee have your html file created by pressing the No. "Please finish my profile." selection
-* Your new html will now be in the output folder!!
-* Open the html in the browser and enjoy your brand new Employee Profile! 
 
+-  You must first clone the repository for this project (https://github.com/pciongoli/employee-profile-generator)
+-  Once you have cloned the file, open it on VS code. Make sure to have the node package manager installed.
+-  Once all of the required packages are installed run the app through the terminal using the command "node app"
+-  You will be taken through a series of prompts regarding the type of employee you would like to add
+-  after you have entered each employee have your html file created by pressing the No. "Please finish my profile." selection
+-  Your new html will now be in the output folder!!
+-  Open the html in the browser and enjoy your brand new Employee Profile!
 
 Your challenge is to build a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. Because testing is key to making code maintainable, you’ll also write unit tests for each part of your code and ensure that it passes all of them.
 
@@ -54,7 +58,6 @@ The following image shows the generated HTML’s appearance and functionality. T
 
 ![HTML webpage titled “My Team” features five boxes listing employee names, titles, and other key info.](./Assets/10-object-oriented-programming-homework-demo.png)
 
-
 ## Getting Started
 
 This Challenge will combine many of the skills you’ve learned over the first ten weeks of this course. To help you get started, we’ve provided some guidelines in addition to the User Story and Acceptance Criteria.
@@ -69,16 +72,16 @@ It is recommended that you start with a directory structure that looks like this
 
 ```md
 .
-├── __tests__/             //jest tests
-│   ├── Employee.test.js
-│   ├── Engineer.test.js
-│   ├── Intern.test.js
-│   └── Manager.test.js
-├── dist/                  // rendered output (HTML) and CSS style sheet
-├── lib/                   // classes
-├── src/                   // template helper code
-├── .gitignore             // indicates which folders and files Git should ignore
-├── index.js               // runs the application
+├── **tests**/ //jest tests
+│ ├── Employee.test.js
+│ ├── Engineer.test.js
+│ ├── Intern.test.js
+│ └── Manager.test.js
+├── dist/ // rendered output (HTML) and CSS style sheet
+├── lib/ // classes
+├── src/ // template helper code
+├── .gitignore // indicates which folders and files Git should ignore
+├── index.js // runs the application
 └── package.json
 ```
 
@@ -88,58 +91,58 @@ The application must have these classes: `Employee`, `Manager`, `Engineer`, and 
 
 The first class is an `Employee` parent class with the following properties and methods:
 
-* `name`
+-  `name`
 
-* `id`
+-  `id`
 
-* `email`
+-  `email`
 
-* `getName()`
+-  `getName()`
 
-* `getId()`
+-  `getId()`
 
-* `getEmail()`
+-  `getEmail()`
 
-* `getRole()`   // Returns 'Employee'
+-  `getRole()` // Returns 'Employee'
 
 The other three classes will extend `Employee`.
 
 In addition to `Employee`'s properties and methods, `Manager` will also have:
 
-* `officeNumber`
+-  `officeNumber`
 
-* `getOfficeNumer()`
+-  `getOfficeNumer()`
 
-* `getRole()`   // Overridden to return `Manager`
+-  `getRole()` // Overridden to return `Manager`
 
 In addition to `Employee`'s properties and methods, `Engineer` will also have:
 
-* `github`  // GitHub username
+-  `github` // GitHub username
 
-* `getGithub()`
+-  `getGithub()`
 
-* `getRole()`   // Overridden to return `Engineer`
+-  `getRole()` // Overridden to return `Engineer`
 
 In addition to `Employee`'s properties and methods, `Intern` will also have:
 
-* `school`
+-  `school`
 
-* `getSchool()`
+-  `getSchool()`
 
-* `getRole()`   // Overridden to return `Intern`
+-  `getRole()` // Overridden to return `Intern`
 
 Finally, although it’s not a requirement, you should consider adding validation to ensure that the user input provided is in the proper expected format.
-
 
 ## Review
 
 You are required to submit the following for review:
 
-* A walkthrough video demonstrating the functionality of the application and passing tests.
+-  A walkthrough video demonstrating the functionality of the application and passing tests.
 
-* A sample HTML file generated using your application.
+-  A sample HTML file generated using your application.
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+-  The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
 
-- - -
+---
+
 © 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
